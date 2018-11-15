@@ -51,7 +51,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StringDistancesUnitTest.cs" />
+    <Compile Include="HammingStringDistances.cs" />
+    <Compile Include="HammingStringDistancesUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

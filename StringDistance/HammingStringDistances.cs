@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace StringDistance
 {
 
-    public class StringDistances
+    public class HammingStringDistances
     {
         /// <summary>
         /// https://en.wikipedia.org/wiki/Hamming_distance
@@ -36,6 +36,7 @@ namespace StringDistance
                     l.Add(dw);
             return l;
         }
+
         public static List<string> CloneDictionaryWithout(List<string> dic, string word)
         {
             var l = new List<string> ();
@@ -64,57 +65,5 @@ namespace StringDistance
         }
     }
 
-    [TestClass]
-    public class StringDistancesUnitTest
-    {
-        [TestMethod]
-        public void GetHammingDistance()
-        {
-            Assert.AreEqual(3, StringDistances.GetHammingDistance("karolin", "kathrin"));
-            Assert.AreEqual(3, StringDistances.GetHammingDistance("karolin", "kerstin"));
-            Assert.AreEqual(2, StringDistances.GetHammingDistance("1011101", "1001001"));
-            Assert.AreEqual(3, StringDistances.GetHammingDistance("2173896", "2233796"));
-        }
-
-        List<string> threeLettersWordDic = new List<string>() {
-            "cat","cut","cot","cog","dog","foo","coy"
-        };
-
-        [TestMethod]
-        public void GetListOfWordsWithHammingDistanceOf()
-        {
-            var result = StringDistances.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "pat");
-            Assert.AreEqual(1, result.Count);
-            CollectionAssert.AreEqual(DS.List("cat"), result);
-
-            result = StringDistances.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "coo");
-            Assert.AreEqual(4, result.Count);
-            CollectionAssert.AreEqual(result, result);
-        }
-
-        [TestMethod]
-        public void ShortestPathBetweenTwoGivenWordsOfSameLengths()
-        {
-            var execution = new StringBuilder();
-            StringDistances.ShortestPathBetweenTwoGivenWordsOfSameLengths(threeLettersWordDic, "cat", "dog", 0, execution);
-var expected = @"cat -> cut
-cut -> cot
-cot -> cog
-cog -> dog Rec:3 Done
-cog -> coy
-cot -> coy
-coy -> cog
-cog -> dog Rec:4 Done
-cat -> cot
-cot -> cut
-cot -> cog
-cog -> dog Rec:2 Done
-cog -> coy
-cot -> coy
-coy -> cog
-cog -> dog Rec:3 Done
-";
-            Assert.AreEqual(expected, execution.ToString());
-        }
-    }
+    
 }
