@@ -41,7 +41,6 @@ https://repl.it/repls/IcyTragicSigns
     {
         str1,
         str2,
-        unknown
     };
 
     public class DeletionInfo
@@ -58,7 +57,7 @@ https://repl.it/repls/IcyTragicSigns
         }
         public override string ToString()
         {
-            return $"in {this.StringName} at ${this.Index} char ${this.Letter}";
+            return $"in {this.StringName} at {this.Index} char '{this.Letter}'";
         }
         public int GetAsciiValue()
         {
@@ -68,6 +67,7 @@ https://repl.it/repls/IcyTragicSigns
 
     public class ASCIIDeletionDistanceResult {
         public int Value;
+        public string History;
     };
 
 
@@ -79,14 +79,23 @@ https://repl.it/repls/IcyTragicSigns
         List<DeletionInfo> _deletions = new List<DeletionInfo>();
         Dictionary<char, int> _str1LettersCountDictionary = new Dictionary<char, int>();
 
-        public ASCIIDeletionDistanceResult ComputeDistanceNotDynamicProgramming(string str1, string str2)
+        public ASCIIDeletionDistanceResult ComputeDistance(string str1, string str2)
         {
             var r = new ASCIIDeletionDistanceResult();
 
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);
             UpdateDeletionsAndLetterDictionaryPass2(str2, str1);
             r.Value = this.GetDeletionsCount();
+            r.History = this.BuildDeletionHistory();
             return r;
+        }
+
+        private string BuildDeletionHistory()
+        {
+            var b = new StringBuilder();
+            foreach(var d in this._deletions) 
+                b.Append(d.ToString()).AppendLine();
+            return b.ToString();
         }
 
         private int GetDeletionsCount()
@@ -146,7 +155,7 @@ https://repl.it/repls/IcyTragicSigns
                 if(e.Value > 0 && !this._deletions.Exists(d => d.Letter == e.Key))
                 {
                     for(var i=0; i < e.Value; i++)
-                        this._deletions.Add(new DeletionInfo(DeletionInfoStringName.unknown, e.Key, -1));
+                        this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str1, e.Key, -1));
                 }
             }
         }
