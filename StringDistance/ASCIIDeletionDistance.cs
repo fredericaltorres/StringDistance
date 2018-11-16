@@ -110,10 +110,10 @@ https://repl.it/repls/IcyTragicSigns
         }
 
 
-        //////////////////////////////
-        // https://stackoverflow.com/questions/30792428/wagner-fischer-algorithm
+        /////////////////////////////////////////////////////
+        /// https://stackoverflow.com/questions/30792428/wagner-fischer-algorithm
 
-        public  int ComputeDistanceDynamicProgramming(string word1, string word2)
+        public  int FisherWagner(string word1, string word2)
         {
             int len1 = word1.Length;
 	        int len2 = word2.Length;
@@ -131,19 +131,21 @@ https://repl.it/repls/IcyTragicSigns
 	        }
 
             //iterate though, and check last char
-	        for (int i = 0; i < len1; i++) {
+	       for (int i = 0; i < len1; i++) {
+
 		        char c1 = word1[i];
+
 		        for (int j = 0; j < len2; j++) {
+
 			        char c2 = word2[j];
- 
-			        //if last two chars equal
-			        if (c1 == c2) {
-				        //update dp value for +1 length
-				        dp[i, j] = dp[i-1, j-1];
-			        } else {
-				        int replace = dp[i-1, j-1] + 1;
-				        int insert = dp[i, j - 1] + 1;
-				        int delete = dp[i -1, j] + 1;
+			        if (c1 == c2) { // if last two chars equal
+				        // update dp value for +1 length
+				        dp[i + 1, j + 1] = dp[i, j];
+			        }
+                    else {
+				        int replace = dp[i, j] + 1;
+				        int insert  = dp[i, j + 1] + 1;
+				        int delete  = dp[i + 1, j] + 1;
  
 				        int min = replace > insert ? insert : replace;
 				        min = delete > min ? min : delete;
@@ -154,8 +156,6 @@ https://repl.it/repls/IcyTragicSigns
 	        return dp[len1, len2];
         }
     }
-
-    
 }
 /*
  for (int i = 0; i < len1; i++) {

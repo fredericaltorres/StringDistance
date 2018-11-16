@@ -1,6 +1,7 @@
-﻿// Another JavaScript version https://repl.it/repls/FamiliarProfitableRegression
-// From https://repl.it/repls/IcyTragicSigns
-// still incomplete
+﻿/*
+    Base from https://repl.it/repls/IcyTragicSigns
+    But fixed bug
+*/
 
 function ArrayContains(arr, val) {
     return arr.indexOf(val) !== -1;
@@ -50,7 +51,7 @@ function ascii_deletion_distance(str1, str2) {
         return total += currLetter.charCodeAt();
     }, 0);
 }
-console.log(ascii_deletion_distance('cat', 'batzz'))
+console.log(ascii_deletion_distance('cat', 'batzz'));
 //console.log(ascii_deletion_distance('cat', 'batz'))
 //console.log(ascii_deletion_distance('cata', 'bat'));
 //console.log(ascii_deletion_distance('cat', 'bat'));

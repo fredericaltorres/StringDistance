@@ -25,12 +25,9 @@ namespace StringDistance
         }
         
          [TestMethod]
-        public void ComputeDistanceDynamicProgramming()
+        public void FisherWagner()
         {
-            Assert.AreEqual(197, new ASCIIDeletionDistance().ComputeDistanceDynamicProgramming("cat", "bat"));
-            //Assert.AreEqual(99, new ASCIIDeletionDistance().ComputeDistanceDynamicProgramming("at", "cat"));
-            //Assert.AreEqual(455, new ASCIIDeletionDistance().ComputeDistanceDynamicProgramming("thought", "slough"));
-            //Assert.AreEqual(298, new ASCIIDeletionDistance().ComputeDistanceDynamicProgramming("bread", "gred"));
+            Assert.AreEqual(197, new ASCIIDeletionDistance().FisherWagner("ABV", "FV"));
         }
     }
 }
