@@ -66,6 +66,7 @@ https://repl.it/repls/IcyTragicSigns
     }
 
     public class ASCIIDeletionDistanceResult {
+
         public int Value;
         public string History;
     };
@@ -81,30 +82,13 @@ https://repl.it/repls/IcyTragicSigns
 
         public ASCIIDeletionDistanceResult ComputeDistance(string str1, string str2)
         {
-            var r = new ASCIIDeletionDistanceResult();
-
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);
             UpdateDeletionsAndLetterDictionaryPass2(str2, str1);
-            r.Value = this.GetDeletionsCount();
-            r.History = this.BuildDeletionHistory();
-            return r;
-        }
 
-        private string BuildDeletionHistory()
-        {
-            var b = new StringBuilder();
-            foreach(var d in this._deletions) 
-                b.Append(d.ToString()).AppendLine();
-            return b.ToString();
-        }
-
-        private int GetDeletionsCount()
-        {
-            var total = 0; // Just count the number of deletions using the ascii value
-            this._deletions.ForEach(c => {
-                total += c.GetAsciiValue();
-            });
-            return total;
+            return new ASCIIDeletionDistanceResult() {
+                Value = this.GetDeletionsCount(),
+                History = this.BuildDeletionHistory()
+            };
         }
 
         /// <summary>
@@ -141,15 +125,18 @@ https://repl.it/repls/IcyTragicSigns
             for (var i = 0; i < str2.Length; i++)
             {
                 var letter = str2[i];
-                // Count the number of letter in both string
+
+                // If a letter from str2 is in _str1LettersCountDictionary with a value > 0
+                // This mean the letter was in both string. Once the counter reach 0, this
+                // mean the letter is str2 but in str1
                 if (this._str1LettersCountDictionary.ContainsKey(letter) && _str1LettersCountDictionary[letter] > 0) 
                     this._str1LettersCountDictionary[letter] -= 1;
                 else
                     this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str2, letter, i));
             }
 
-            // Check for letter that where twice or more in str1 but once in str2
-            // Check for letter that where twice or more in str2 but once in str1
+            // Check for letter that where twice in str1 but once in str2 (or more...)
+            // Check for letter that where twice in str2 but once in str1 (or more...)
             foreach(var e in _str1LettersCountDictionary)
             {
                 if(e.Value > 0 && !this._deletions.Exists(d => d.Letter == e.Key))
@@ -158,6 +145,25 @@ https://repl.it/repls/IcyTragicSigns
                         this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str1, e.Key, -1));
                 }
             }
+        }
+
+
+        
+        private string BuildDeletionHistory()
+        {
+            var b = new StringBuilder();
+            foreach(var d in this._deletions) 
+                b.Append(d.ToString()).AppendLine();
+            return b.ToString();
+        }
+
+        private int GetDeletionsCount()
+        {
+            var total = 0; // Just count the number of deletions using the ascii value
+            this._deletions.ForEach(c => {
+                total += c.GetAsciiValue();
+            });
+            return total;
         }
     }
 }
