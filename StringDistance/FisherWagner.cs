@@ -30,10 +30,8 @@ Wagner–Fischer algorithm:
     https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
     https://www.programcreek.com/2013/12/edit-distance-in-java/
     https://www.biditacharya.com/expository/a3d/2017/09/15/a3d-word-distance.html
-
     https://www.geeksforgeeks.org/check-if-two-given-strings-are-at-edit-distance-one/
-         
-https://repl.it/repls/IcyTragicSigns
+    https://repl.it/repls/IcyTragicSigns
 
     */
     public class FisherWagner

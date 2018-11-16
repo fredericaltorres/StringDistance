@@ -54,8 +54,8 @@
     <Compile Include="FisherWagner.cs" />
     <Compile Include="ASCIIDeletionDistance.cs" />
     <Compile Include="HammingStringDistances.cs" />
-    <Compile Include="ASCIIDeletionDistanceUnitTest.cs" />
-    <Compile Include="HammingStringDistancesUnitTest.cs" />
+    <Compile Include="UnitTests\ASCIIDeletionDistanceUnitTest.cs" />
+    <Compile Include="UnitTests\HammingStringDistancesUnitTest.cs" />
     <Content Include="JavaScript\ASCIIDeletionDistance.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

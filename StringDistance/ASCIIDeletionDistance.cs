@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringDistance
 {
-    /*
+ /*
      
 The deletion distance between two strings is the minimum sum of ASCII values of characters 
 that you need to delete in the two strings in order to have the same string. 
@@ -36,25 +36,64 @@ Wagner–Fischer algorithm:
 https://repl.it/repls/IcyTragicSigns
 
     */
+
+    public enum DeletionInfoStringName
+    {
+        str1,
+        str2,
+        unknown
+    };
+
+    public class DeletionInfo
+    {
+        public DeletionInfoStringName StringName;
+        public Char Letter;
+        public int Index;
+
+        public DeletionInfo(DeletionInfoStringName stringName, Char letter, int index)
+        {
+            this.StringName = stringName;
+            this.Letter = letter;
+            this.Index = index;
+        }
+        public override string ToString()
+        {
+            return $"in {this.StringName} at ${this.Index} char ${this.Letter}";
+        }
+        public int GetAsciiValue()
+        {
+            return (int)this.Letter;
+        }
+    }
+
+    public class ASCIIDeletionDistanceResult {
+        public int Value;
+    };
+
+
+    /// <summary>
+    /// This class is based on the code https://repl.it/repls/IcyTragicSigns
+    /// </summary>
     public class ASCIIDeletionDistance
     {
-        List<char> deletions = new List<char>();
-        Dictionary<char, int> str1Letters = new Dictionary<char, int>();
+        List<DeletionInfo> _deletions = new List<DeletionInfo>();
+        Dictionary<char, int> _str1LettersCountDictionary = new Dictionary<char, int>();
 
-        public  int ComputeDistanceNotDynamicProgramming(string str1, string str2)
+        public ASCIIDeletionDistanceResult ComputeDistanceNotDynamicProgramming(string str1, string str2)
         {
+            var r = new ASCIIDeletionDistanceResult();
+
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);
             UpdateDeletionsAndLetterDictionaryPass2(str2, str1);
-
-            return this.GetDeletionsCount();
+            r.Value = this.GetDeletionsCount();
+            return r;
         }
 
         private int GetDeletionsCount()
         {
             var total = 0; // Just count the number of deletions using the ascii value
-            deletions.ForEach(c =>
-            {
-                total += (int)c;
+            this._deletions.ForEach(c => {
+                total += c.GetAsciiValue();
             });
             return total;
         }
@@ -73,12 +112,12 @@ https://repl.it/repls/IcyTragicSigns
                 var letter = str1[i];
 
                 if (!str2.Contains(letter)) // This letter is not in str2 therefore must be deleted
-                    deletions.Add(letter);
+                    this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str1, letter, i));
 
-                if (str1Letters.ContainsKey(letter)) // Just count the number of letter
-                    str1Letters[letter] += 1;
+                if (this._str1LettersCountDictionary.ContainsKey(letter)) // Just count the number of letter
+                    this._str1LettersCountDictionary[letter] += 1;
                 else
-                    str1Letters[letter] = 1;                    
+                    this._str1LettersCountDictionary[letter] = 1;                    
             }
         }
         /// <summary>
@@ -94,17 +133,20 @@ https://repl.it/repls/IcyTragicSigns
             {
                 var letter = str2[i];
                 // Count the number of letter in both string
-                if (str1Letters.ContainsKey(letter) && str1Letters[letter] > 0) 
-                    str1Letters[letter] -= 1;
+                if (this._str1LettersCountDictionary.ContainsKey(letter) && _str1LettersCountDictionary[letter] > 0) 
+                    this._str1LettersCountDictionary[letter] -= 1;
                 else
-                    deletions.Add(letter);
+                    this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str2, letter, i));
             }
 
-            // Check for letter that where twice in str1 but once in str2
-            foreach(var e in str1Letters)
+            // Check for letter that where twice or more in str1 but once in str2
+            // Check for letter that where twice or more in str2 but once in str1
+            foreach(var e in _str1LettersCountDictionary)
             {
-                if(e.Value > 0 && !this.deletions.Contains(e.Key)) {
-                    deletions.Add(e.Key);
+                if(e.Value > 0 && !this._deletions.Exists(d => d.Letter == e.Key))
+                {
+                    for(var i=0; i < e.Value; i++)
+                        this._deletions.Add(new DeletionInfo(DeletionInfoStringName.unknown, e.Key, -1));
                 }
             }
         }
