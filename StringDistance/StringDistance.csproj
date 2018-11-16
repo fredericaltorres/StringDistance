@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FisherWagner.cs" />
     <Compile Include="ASCIIDeletionDistance.cs" />
     <Compile Include="HammingStringDistances.cs" />
     <Compile Include="ASCIIDeletionDistanceUnitTest.cs" />

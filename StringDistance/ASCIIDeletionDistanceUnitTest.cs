@@ -27,7 +27,7 @@ namespace StringDistance
          [TestMethod]
         public void FisherWagner()
         {
-            Assert.AreEqual(197, new ASCIIDeletionDistance().FisherWagner("ABV", "FV"));
+            Assert.AreEqual(197, new FisherWagner().ComputeFisherWagner("ABV", "FV"));
         }
     }
 }
