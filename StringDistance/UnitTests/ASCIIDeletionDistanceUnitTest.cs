@@ -10,8 +10,6 @@ namespace StringDistances
     [TestClass]
     public class ComputeASCIIDeletionDistanceUnitTest
     {
-
-
         [TestMethod]
         public void __DynamicProgramming_ComputeDistance_SimpleCases()
         {
@@ -32,26 +30,6 @@ namespace StringDistances
             Assert.AreEqual( 99, new ASCIIDeletionDistance().Compute("at", "cat").Value);
             Assert.AreEqual(559, new ASCIIDeletionDistance().Compute("thought", "slough").Value);
             Assert.AreEqual(298, new ASCIIDeletionDistance().Compute("bread", "gred").Value);
-
-/*
-        b r e a d
-    g   0 0 0 0 0 delete g
-    r   0 1 0 0 0 keep r
-    e   0 0 1 0 0 keep e
-    d   0 0 0 0 1 keep d
-        
-        delelte b, keep r, keep e delete a, keep d
-
-        g, b, a
-
-        c a t 
-    b   0 0 0
-    a   0 1 0
-    t   0 0 1
-             
-*/
-
-
         }
 
         [TestMethod]
