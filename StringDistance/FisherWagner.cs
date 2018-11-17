@@ -33,13 +33,27 @@ namespace StringDistances
             public string MatrixAsString;
         }
 
-        public string GetMatrixString(int[,] matrix, int len1, int len2)
+        public string GetMatrixString(int[,] matrix, int len1, int len2, string word1, string word2)
         {
-            var r = new StringBuilder();             
+            const string IntegerTemplate = "{0:000} ";
+            const string IntegerTemplateBlank = "    ";
+
+            var r = new StringBuilder();
+
+            r.Append(IntegerTemplateBlank).Append(IntegerTemplateBlank);
+            foreach(var c in word2)
+                r.AppendFormat(" {0}  ", c);
+            r.AppendLine();
+
 	        for (int i = 0; i < len1; i++)
             {
+                if( i == 0 )
+                    r.Append(IntegerTemplateBlank);
+                else
+                    r.AppendFormat(" {0}  ", word1[i-1]);
+
 		        for (int j = 0; j < len2; j++) {
-                    r.AppendFormat("{0:000} ", matrix[i, j]);
+                    r.AppendFormat(IntegerTemplate, matrix[i, j]);
                 }
                 r.AppendLine();
             }
@@ -92,7 +106,7 @@ namespace StringDistances
             return new FisherWagnerResult() {
                 Value = dp[len1, len2],
                 Matrix = dp,
-                MatrixAsString = this.GetMatrixString(dp, len1+1, len2+1)
+                MatrixAsString = this.GetMatrixString(dp, len1+1, len2+1, word1, word2)
             };
         }
     }

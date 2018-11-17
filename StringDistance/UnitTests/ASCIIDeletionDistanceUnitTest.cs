@@ -50,17 +50,5 @@ in str2 at 4 char 'z'
             Assert.AreEqual(441, result.Value);
         }
         
-        [TestMethod]
-        public void FisherWagner()
-        {
-            var result = new FisherWagner().ComputeFisherWagner("ABV", "FV");
-            Assert.AreEqual(2, result.Value);
-
-            result = new FisherWagner().ComputeFisherWagner("sitting", "kitten");
-            Assert.AreEqual(3, result.Value);
-
-            result = new FisherWagner().ComputeFisherWagner("Sunday", "Saturday");
-            Assert.AreEqual(3, result.Value);
-        }
     }
 }
