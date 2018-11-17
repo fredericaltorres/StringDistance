@@ -51,9 +51,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASCIIDeletionDistance\ASCIIDeletionDistanceResult.cs" />
+    <Compile Include="ASCIIDeletionDistance\DeletionInfo.cs" />
+    <Compile Include="ASCIIDeletionDistance\DeletionInfoStringName.cs" />
     <Compile Include="FisherWagner.cs" />
-    <Compile Include="ASCIIDeletionDistance.cs" />
-    <Compile Include="HammingStringDistances.cs" />
+    <Compile Include="ASCIIDeletionDistance\ASCIIDeletionDistance.cs" />
+    <Compile Include="HammingStringDistance\HammingStringDistance.cs" />
     <Compile Include="UnitTests\ASCIIDeletionDistanceUnitTest.cs" />
     <Compile Include="UnitTests\HammingStringDistancesUnitTest.cs" />
     <Content Include="JavaScript\ASCIIDeletionDistance.js" />

@@ -7,33 +7,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringDistance
 {
-    /*
-     
-The deletion distance between two strings is the minimum sum of ASCII values of characters 
-that you need to delete in the two strings in order to have the same string. 
 
-The deletion distance between cat and at is 99, because you can just delete the first 
-character of cat and the ASCII value of 'c' is 99. 
+/*
+    Wagner–Fischer algorithm: 
 
-The deletion distance between cat and bat is 98 + 99, because you need to delete the first 
-character of both words. 
+        https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
+        https://www.programcreek.com/2013/12/edit-distance-in-java/
+        https://www.biditacharya.com/expository/a3d/2017/09/15/a3d-word-distance.html
+        https://www.geeksforgeeks.org/check-if-two-given-strings-are-at-edit-distance-one/
+        https://repl.it/repls/IcyTragicSigns
 
-Of course, the deletion distance between two strings can't be greater than the sum of their 
-total ASCII values, because you can always just delete both of the strings entirely. 
+*/
 
-Implement an efficient function to find the deletion distance between two strings.
-
-You can refer to the Wikipedia article on the algorithm for edit distance if you want to. 
-The algorithm there is not quite the same as the algorithm required here, but it's similar.         
-
-Wagner–Fischer algorithm: 
-    https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
-    https://www.programcreek.com/2013/12/edit-distance-in-java/
-    https://www.biditacharya.com/expository/a3d/2017/09/15/a3d-word-distance.html
-    https://www.geeksforgeeks.org/check-if-two-given-strings-are-at-edit-distance-one/
-    https://repl.it/repls/IcyTragicSigns
-
-    */
     public class FisherWagner
     {
         /////////////////////////////////////////////////////
@@ -47,19 +32,21 @@ Wagner–Fischer algorithm:
  
             int[,] dp = new int[len1 + 1, len2 + 1];
  
-            for (int i = 0; i <= len1; i++) {
+            for (int i = 0; i <= len1; i++)
+            {
 		        dp[i, 0] = i;   // the distance of any first string to an empty second string
                                 // (transforming the string of the first i characters of s into
                                 // the empty string requires i deletions)
 	        }
  
-	        for (int j = 0; j <= len2; j++) {
+	        for (int j = 0; j <= len2; j++)
+            {
 		        dp[0, j] = j; // the distance of any second string to an empty first string
 	        }
 
             // iterate though, and check last char
-	       for (int i = 0; i < len1; i++) {
-
+	        for (int i = 0; i < len1; i++)
+            {
 		        char c1 = word1[i];
 
 		        for (int j = 0; j < len2; j++) {
@@ -69,7 +56,8 @@ Wagner–Fischer algorithm:
 				        // update dp value for +1 length
 				        dp[i + 1, j + 1] = dp[i, j];
 			        }
-                    else {
+                    else
+                    {
 				        int replace = dp[i, j] + 1;
 				        int insert  = dp[i, j + 1] + 1;
 				        int delete  = dp[i + 1, j] + 1;

@@ -18,20 +18,20 @@ namespace StringDistance
         [TestMethod]
         public void GetHammingDistance()
         {
-            Assert.AreEqual(3, HammingStringDistances.GetHammingDistance("karolin", "kathrin"));
-            Assert.AreEqual(3, HammingStringDistances.GetHammingDistance("karolin", "kerstin"));
-            Assert.AreEqual(2, HammingStringDistances.GetHammingDistance("1011101", "1001001"));
-            Assert.AreEqual(3, HammingStringDistances.GetHammingDistance("2173896", "2233796"));
+            Assert.AreEqual(3, HammingStringDistance.GetHammingDistance("karolin", "kathrin"));
+            Assert.AreEqual(3, HammingStringDistance.GetHammingDistance("karolin", "kerstin"));
+            Assert.AreEqual(2, HammingStringDistance.GetHammingDistance("1011101", "1001001"));
+            Assert.AreEqual(3, HammingStringDistance.GetHammingDistance("2173896", "2233796"));
         }
 
         [TestMethod]
         public void GetListOfWordsWithHammingDistanceOf()
         {
-            var result = HammingStringDistances.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "pat");
+            var result = HammingStringDistance.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "pat");
             Assert.AreEqual(1, result.Count);
             CollectionAssert.AreEqual(DS.List("cat"), result);
 
-            result = HammingStringDistances.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "coo");
+            result = HammingStringDistance.GetListOfWordsWithHammingDistanceOf(threeLettersWordDic, "coo");
             Assert.AreEqual(4, result.Count);
             CollectionAssert.AreEqual(result, result);
         }
@@ -40,7 +40,7 @@ namespace StringDistance
         public void ShortestPathBetweenTwoGivenWordsOfSameLengths()
         {
             var execution = new StringBuilder();
-            HammingStringDistances.ShortestPathBetweenTwoGivenWordsOfSameLengths(threeLettersWordDic, "cat", "dog", 0, execution);
+            HammingStringDistance.ShortestPathBetweenTwoGivenWordsOfSameLengths(threeLettersWordDic, "cat", "dog", 0, execution);
 var expected = @"cat -> cut
 cut -> cot
 cot -> cog
