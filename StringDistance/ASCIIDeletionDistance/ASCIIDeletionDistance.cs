@@ -48,6 +48,8 @@ namespace StringDistances
         /// <param name="str2"></param>
         private void UpdateDeletionsAndLetterDictionaryPass1(string str1, string str2)
         {
+            // Loop thru str1 and compare with str2 to update _deletions and 
+            // Loop thru str1 to count each letter in _str1LettersCountDictionary
             for (var i = 0; i < str1.Length; i++)
             {
                 var letter = str1[i];
@@ -71,26 +73,32 @@ namespace StringDistances
         /// <param name="str1"></param>
         private void UpdateDeletionsAndLetterDictionaryPass2(string str2, string str1)
         {
+            // Loop thru str2 and compare with str1 data stored in _str1LettersCountDictionary
             for (var i = 0; i < str2.Length; i++)
             {
                 var letter = str2[i];
 
-                // If a letter from str2 is in _str1LettersCountDictionary with a value > 0
-                // This mean the letter was in both string. Once the counter reach 0, this
-                // mean the letter is str2 but in str1
-                if (this._str1LettersCountDictionary.ContainsKey(letter) && _str1LettersCountDictionary[letter] > 0) 
-                    this._str1LettersCountDictionary[letter] -= 1;
-                else
+                if (this._str1LettersCountDictionary.ContainsKey(letter)) {
+                    
+                    // If a letter from str2 is in _str1LettersCountDictionary with a value > 0
+                    // This mean the letter was in both string. Once the counter reach 0, this
+                    // mean the letter is str2 but in str1
+                    if (_str1LettersCountDictionary[letter] > 0) 
+                        this._str1LettersCountDictionary[letter] -= 1;
+                    else
+                        this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str2, letter, i));
+                }
+                else {
                     this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str2, letter, i));
+                }
             }
 
             // Check for letter that where twice in str1 but once in str2 (or more...)
-            // Check for letter that where twice in str2 but once in str1 (or more...)
-            foreach(var e in _str1LettersCountDictionary)
+            foreach (var e in _str1LettersCountDictionary)
             {
-                if(e.Value > 0 && !this._deletions.Exists(d => d.Letter == e.Key))
+                if (e.Value > 0 && !this._deletions.Exists(d => d.Letter == e.Key))
                 {
-                    for(var i=0; i < e.Value; i++)
+                    for (var i = 0; i < e.Value; i++)
                         this._deletions.Add(new DeletionInfo(DeletionInfoStringName.str1, e.Key, -1));
                 }
             }

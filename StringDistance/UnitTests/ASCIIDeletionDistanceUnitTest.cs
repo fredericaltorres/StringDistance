@@ -11,18 +11,18 @@ namespace StringDistances
     public class ComputeASCIIDeletionDistanceUnitTest
     {
         [TestMethod]
-        public void ComputeDistanceNotDynamicProgramming_SimpleCases()
+        public void ComputeDistance_SimpleCases()
         {
             Assert.AreEqual(197, new ASCIIDeletionDistance().Compute("cat", "bat").Value);
             Assert.AreEqual(294, new ASCIIDeletionDistance().Compute("cata", "bat").Value);
             Assert.AreEqual(319, new ASCIIDeletionDistance().Compute("cat", "batz").Value);
-            Assert.AreEqual(99, new ASCIIDeletionDistance().Compute("at", "cat").Value);
+            Assert.AreEqual( 99, new ASCIIDeletionDistance().Compute("at", "cat").Value);
             Assert.AreEqual(559, new ASCIIDeletionDistance().Compute("thought", "slough").Value);
             Assert.AreEqual(298, new ASCIIDeletionDistance().Compute("bread", "gred").Value);
         }
 
         [TestMethod]
-        public void ComputeDistanceNotDynamicProgramming_MultipleRepeatOfSameLetter_InStr1()
+        public void ComputeDistance_MultipleRepeatOfSameLetter_InStr1()
         {
             var result = new ASCIIDeletionDistance().Compute("cattt", "bat");
 
@@ -36,7 +36,7 @@ in str1 at -1 char 't'
         }
 
         [TestMethod]
-        public void ComputeDistanceNotDynamicProgramming_MultipleRepeatOfSameLetter_InStr2()
+        public void ComputeDistance_MultipleRepeatOfSameLetter_InStr2()
         {
             var result = new ASCIIDeletionDistance().Compute("cat", "batzz");
 
