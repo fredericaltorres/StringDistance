@@ -5,9 +5,8 @@ using System.Text;
 using DynamicSugar;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace StringDistance
+namespace StringDistances
 {
-
     [TestClass]
     public class ComputeASCIIDeletionDistanceUnitTest
     {
@@ -54,7 +53,14 @@ in str2 at 4 char 'z'
         [TestMethod]
         public void FisherWagner()
         {
-            //Assert.AreEqual(197, new FisherWagner().ComputeFisherWagner("ABV", "FV"));
+            var result = new FisherWagner().ComputeFisherWagner("ABV", "FV");
+            Assert.AreEqual(2, result.Value);
+
+            result = new FisherWagner().ComputeFisherWagner("sitting", "kitten");
+            Assert.AreEqual(3, result.Value);
+
+            result = new FisherWagner().ComputeFisherWagner("Sunday", "Saturday");
+            Assert.AreEqual(3, result.Value);
         }
     }
 }

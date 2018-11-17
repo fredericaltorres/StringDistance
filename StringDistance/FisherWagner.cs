@@ -5,7 +5,7 @@ using System.Text;
 using DynamicSugar;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace StringDistance
+namespace StringDistances
 {
 
 /*
@@ -24,8 +24,29 @@ namespace StringDistance
         /////////////////////////////////////////////////////
         /// https://stackoverflow.com/questions/30792428/wagner-fischer-algorithm
         /// https://www.programcreek.com/2013/12/edit-distance-in-java/
+        /// 
 
-        public int ComputeFisherWagner(string word1, string word2)
+        public class FisherWagnerResult
+        {
+            public int Value;
+            public int[,] Matrix;
+            public string MatrixAsString;
+        }
+
+        public string GetMatrixString(int[,] matrix, int len1, int len2)
+        {
+            var r = new StringBuilder();             
+	        for (int i = 0; i < len1; i++)
+            {
+		        for (int j = 0; j < len2; j++) {
+                    r.AppendFormat("{0:000} ", matrix[i, j]);
+                }
+                r.AppendLine();
+            }
+            return r.ToString();
+        }
+
+        public FisherWagnerResult ComputeFisherWagner(string word1, string word2)
         {
             int len1 = word1.Length;
 	        int len2 = word2.Length;
@@ -68,7 +89,11 @@ namespace StringDistance
 			        }
 		        }
 	        }
-	        return dp[len1, len2];
+            return new FisherWagnerResult() {
+                Value = dp[len1, len2],
+                Matrix = dp,
+                MatrixAsString = this.GetMatrixString(dp, len1+1, len2+1)
+            };
         }
     }
 }
@@ -154,7 +179,7 @@ Steps:
 [4, 4] go from 't' to 't' -> nothing -> use count from [3,3] + 0 = 1 op
 [5, 5] go from 'i' to 'e' -> replace -> use count from [4,4] + 1 = 2 op
 [6, 6] go from 'n' to 'n' -> nothing -> use count from [5,5] + 0 = 2 op
-[7, 7] go from 'g' to ''  -> delete 'g' -> use count from [6,6] + 1 = 3 op
+[6, 7] go from 'g' to ''  -> delete 'g' -> use count from [6,6] + 1 = 3 op
 
 'sitting' 'kitten'
 's'  'k'                replace s with k

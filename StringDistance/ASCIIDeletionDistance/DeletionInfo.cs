@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StringDistance
+namespace StringDistances
 {
     public class DeletionInfo
     {

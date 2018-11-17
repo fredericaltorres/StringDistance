@@ -5,7 +5,7 @@ using System.Text;
 using DynamicSugar;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace StringDistance
+namespace StringDistances
 {
 
     [TestClass]

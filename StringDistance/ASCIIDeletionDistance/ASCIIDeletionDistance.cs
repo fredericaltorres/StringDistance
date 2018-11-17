@@ -4,7 +4,7 @@ using System.Text;
 using DynamicSugar;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace StringDistance
+namespace StringDistances
 {
     /// <summary>
     /// This class is based on the code https://repl.it/repls/IcyTragicSigns

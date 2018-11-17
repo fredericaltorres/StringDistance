@@ -1,4 +1,4 @@
-﻿namespace StringDistance
+﻿namespace StringDistances
 {
     public class ASCIIDeletionDistanceResult {
 
