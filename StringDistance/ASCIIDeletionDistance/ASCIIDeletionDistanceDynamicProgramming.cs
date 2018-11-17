@@ -48,11 +48,10 @@ delete c, delete second a, delete b
 
     public class ASCIIDeletionDistanceDynamicProgramming
     {
-
         /// <summary>
         /// Store all the letter to delete in str1 and str2
         /// </summary>
-        List<int> _deletions = new List<int>();
+        private List<int> _deletions = new List<int>();
 
         private bool IsRowAll0(int[,] matrix, int row, int maxCol)
         {
@@ -61,6 +60,7 @@ delete c, delete second a, delete b
                     return false;
             return true;
         }
+
         private bool IsColAll0(int[,] matrix, int col, int maxRow)
         {
             for(var i=0; i < maxRow; i++) 
@@ -79,14 +79,12 @@ delete c, delete second a, delete b
 	        for (int i = 0; i < len1; i++)
             {
 		        char c1 = word1[i];
-
 		        for (int j = 0; j < len2; j++) {
-
 			        char c2 = word2[j];
                     if(c1 == c2)
                     {
                         if(IsColAll0(dp, j, len1))
-                            dp[i, j] += 1;
+                            dp[i, j] = 1;
                     }
 		        }
 	        }
@@ -100,7 +98,7 @@ delete c, delete second a, delete b
 
             for (int j = 0; j < len2; j++)
             {
-		        char c = word2[j];
+                char c = word2[j];
                 if(IsColAll0(dp, j, len1))
                     this._deletions.Add(c);
 	        }
