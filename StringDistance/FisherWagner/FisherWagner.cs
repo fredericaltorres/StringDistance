@@ -7,60 +7,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringDistances
 {
+    /*
+        Wagner–Fischer algorithm: 
 
-/*
-    Wagner–Fischer algorithm: 
+            https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
+    */
 
-        https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
-        https://www.programcreek.com/2013/12/edit-distance-in-java/
-        https://www.biditacharya.com/expository/a3d/2017/09/15/a3d-word-distance.html
-        https://www.geeksforgeeks.org/check-if-two-given-strings-are-at-edit-distance-one/
-        https://repl.it/repls/IcyTragicSigns
-
-*/
-
-    public class FisherWagner
+    public partial class FisherWagner
     {
-        /////////////////////////////////////////////////////
-        /// https://stackoverflow.com/questions/30792428/wagner-fischer-algorithm
-        /// https://www.programcreek.com/2013/12/edit-distance-in-java/
-        /// 
-
-        public class FisherWagnerResult
-        {
-            public int Value;
-            public int[,] Matrix;
-            public string MatrixAsString;
-        }
-
-        public string GetMatrixString(int[,] matrix, int len1, int len2, string word1, string word2)
-        {
-            const string IntegerTemplate = "{0:000} ";
-            const string IntegerTemplateBlank = "    ";
-
-            var r = new StringBuilder();
-
-            r.Append(IntegerTemplateBlank).Append(IntegerTemplateBlank);
-            foreach(var c in word2)
-                r.AppendFormat(" {0}  ", c);
-            r.AppendLine();
-
-	        for (int i = 0; i < len1; i++)
-            {
-                if( i == 0 )
-                    r.Append(IntegerTemplateBlank);
-                else
-                    r.AppendFormat(" {0}  ", word1[i-1]);
-
-		        for (int j = 0; j < len2; j++) {
-                    r.AppendFormat(IntegerTemplate, matrix[i, j]);
-                }
-                r.AppendLine();
-            }
-            return r.ToString();
-        }
-
-        public FisherWagnerResult ComputeFisherWagner(string word1, string word2)
+        public FisherWagnerResult Compute(string word1, string word2)
         {
             int len1 = word1.Length;
 	        int len2 = word2.Length;
@@ -109,31 +64,35 @@ namespace StringDistances
                 MatrixAsString = this.GetMatrixString(dp, len1+1, len2+1, word1, word2)
             };
         }
-    }
-}
-/*
- for (int i = 0; i < len1; i++) {
-		        char c1 = word1[i];
-		        for (int j = 0; j < len2; j++) {
-			        char c2 = word2[j];
- 
-			        //if last two chars equal
-			        if (c1 == c2) {
-				        //update dp value for +1 length
-				        dp[i + 1, j + 1] = dp[i, j];
-			        } else {
-				        int replace = dp[i, j] + 1;
-				        int insert = dp[i, j + 1] + 1;
-				        int delete = dp[i + 1, j] + 1;
- 
-				        int min = replace > insert ? insert : replace;
-				        min = delete > min ? min : delete;
-				        dp[i + 1, j + 1] = min;
-			        }
-		        }
-	        }
-     */
+        public string GetMatrixString(int[,] matrix, int len1, int len2, string word1, string word2)
+        {
+            const string IntegerTemplate = "{0:000} ";
+            const string IntegerTemplateBlank = "    ";
 
+            var r = new StringBuilder();
+
+            r.Append(IntegerTemplateBlank).Append(IntegerTemplateBlank);
+            foreach(var c in word2)
+                r.AppendFormat(" {0}  ", c);
+            r.AppendLine();
+
+	        for (int i = 0; i < len1; i++)
+            {
+                if( i == 0 )
+                    r.Append(IntegerTemplateBlank);
+                else
+                    r.AppendFormat(" {0}  ", word1[i-1]);
+
+		        for (int j = 0; j < len2; j++) {
+                    r.AppendFormat(IntegerTemplate, matrix[i, j]);
+                }
+                r.AppendLine();
+            }
+            return r.ToString();
+        }
+    }
+
+}
 /*
 
 Map for going from  "AB" to "FV"

@@ -27,7 +27,7 @@ namespace StringDistances
         /// <param name="str1"></param>
         /// <param name="str2"></param>
         /// <returns></returns>
-        public ASCIIDeletionDistanceResult ComputeDistance(string str1, string str2)
+        public ASCIIDeletionDistanceResult Compute(string str1, string str2)
         {
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);
             UpdateDeletionsAndLetterDictionaryPass2(str2, str1);

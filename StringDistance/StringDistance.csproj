@@ -54,8 +54,9 @@
     <Compile Include="ASCIIDeletionDistance\ASCIIDeletionDistanceResult.cs" />
     <Compile Include="ASCIIDeletionDistance\DeletionInfo.cs" />
     <Compile Include="ASCIIDeletionDistance\DeletionInfoStringName.cs" />
-    <Compile Include="FisherWagner.cs" />
+    <Compile Include="FisherWagner\FisherWagner.cs" />
     <Compile Include="ASCIIDeletionDistance\ASCIIDeletionDistance.cs" />
+    <Compile Include="FisherWagner\FisherWagnerResult.cs" />
     <Compile Include="HammingStringDistance\HammingStringDistance.cs" />
     <Compile Include="UnitTests\FisherWagnerDistanceUnitTest.cs" />
     <Compile Include="UnitTests\ASCIIDeletionDistanceUnitTest.cs" />
