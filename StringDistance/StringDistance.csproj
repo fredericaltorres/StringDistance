@@ -62,13 +62,11 @@
     <Compile Include="UnitTests\FisherWagnerDistanceUnitTest.cs" />
     <Compile Include="UnitTests\ASCIIDeletionDistanceUnitTest.cs" />
     <Compile Include="UnitTests\HammingStringDistancesUnitTest.cs" />
-    <Content Include="JavaScript\ASCIIDeletionDistance2.js" />
     <Content Include="JavaScript\ASCIIDeletionDistance.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Python\fischer_wagner_explained.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ref\" />

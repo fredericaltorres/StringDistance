@@ -119,5 +119,4 @@ delete c, delete second a, delete b
             return total;
         }
     }
-
 }
