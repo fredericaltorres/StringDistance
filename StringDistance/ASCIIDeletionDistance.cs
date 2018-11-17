@@ -77,9 +77,22 @@ https://repl.it/repls/IcyTragicSigns
     /// </summary>
     public class ASCIIDeletionDistance
     {
+        /// <summary>
+        /// Store all the letter to delete in str1 and str2
+        /// </summary>
         List<DeletionInfo> _deletions = new List<DeletionInfo>();
+
+        /// <summary>
+        /// Store the count of letter in str1
+        /// </summary>
         Dictionary<char, int> _str1LettersCountDictionary = new Dictionary<char, int>();
 
+        /// <summary>
+        /// Compute and return the ASCII Deletion Distance value and delete history
+        /// </summary>
+        /// <param name="str1"></param>
+        /// <param name="str2"></param>
+        /// <returns></returns>
         public ASCIIDeletionDistanceResult ComputeDistance(string str1, string str2)
         {
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);

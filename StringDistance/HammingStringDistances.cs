@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringDistance
 {
-
     public class HammingStringDistances
     {
         /// <summary>
