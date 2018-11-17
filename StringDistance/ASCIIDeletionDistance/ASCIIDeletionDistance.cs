@@ -32,7 +32,8 @@ namespace StringDistances
             UpdateDeletionsAndLetterDictionaryPass1(str1, str2);
             UpdateDeletionsAndLetterDictionaryPass2(str2, str1);
 
-            return new ASCIIDeletionDistanceResult() {
+            return new ASCIIDeletionDistanceResult()
+            {
                 Value = this.GetDeletionsCount(),
                 History = this.BuildDeletionHistory()
             };
@@ -60,6 +61,7 @@ namespace StringDistances
                     this._str1LettersCountDictionary[letter] = 1;                    
             }
         }
+
         /// <summary>
         /// Analyse str2 based on str1, foreach char in str2
         /// - if the letter has count > 0 then decrease it
@@ -93,8 +95,6 @@ namespace StringDistances
                 }
             }
         }
-
-
         
         private string BuildDeletionHistory()
         {
