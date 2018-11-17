@@ -72,36 +72,36 @@ delete c, delete second a, delete b
         public FisherWagner.FisherWagnerResult Compute(string word1, string word2)
         {
             int len1 = word1.Length;
-	        int len2 = word2.Length;
+	    int len2 = word2.Length;
  
             int[,] dp = new int[len1, len2]; // Will be filled with 0
 
-	        for (int i = 0; i < len1; i++)
+            for (int i = 0; i < len1; i++)
             {
-		        char c1 = word1[i];
-		        for (int j = 0; j < len2; j++) {
-			        char c2 = word2[j];
+                char c1 = word1[i];
+                for (int j = 0; j < len2; j++) {
+                    char c2 = word2[j];
                     if(c1 == c2)
                     {
                         if(IsColAll0(dp, j, len1))
                             dp[i, j] = 1;
                     }
-		        }
-	        }
+                }
+            }
 
             for (int i = 0; i < len1; i++)
             {
-		        char c = word1[i];
+                char c = word1[i];
                 if(IsRowAll0(dp, i, len2))
                     this._deletions.Add(c);
-	        }
+            }
 
             for (int j = 0; j < len2; j++)
             {
                 char c = word2[j];
                 if(IsColAll0(dp, j, len1))
                     this._deletions.Add(c);
-	        }
+            }
 
             return new FisherWagner.FisherWagnerResult ()
             {
