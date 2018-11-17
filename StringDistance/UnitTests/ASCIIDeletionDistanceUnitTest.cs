@@ -11,7 +11,7 @@ namespace StringDistances
     public class ComputeASCIIDeletionDistanceUnitTest
     {
         [TestMethod]
-        public void __DynamicProgramming_ComputeDistance_SimpleCases()
+        public void DynamicProgramming_ComputeDistance_SimpleCases()
         {
             Assert.AreEqual(197, new ASCIIDeletionDistanceDynamicProgramming().Compute("cat", "bat").Value);
             Assert.AreEqual(294, new ASCIIDeletionDistanceDynamicProgramming().Compute("cata", "bat").Value);
