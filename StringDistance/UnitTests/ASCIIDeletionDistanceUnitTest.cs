@@ -51,19 +51,6 @@ in str1 at -1 char 't'
         {
             var result = new ASCIIDeletionDistance().Compute("cat", "batzz");
 
-
-/*
-
-        c a t 
-    b   0 0 0
-    a   0 1 0
-    t   0 0 1
-    z   0 0 0
-    z   0 0 0
-             
-*/
-
-
 var expectedHistory = @"in str1 at 0 char 'c'
 in str2 at 0 char 'b'
 in str2 at 3 char 'z'
